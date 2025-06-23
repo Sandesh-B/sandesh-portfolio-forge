@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Code, Palette, Server, Smartphone, Database, Globe } from 'lucide-react';
 
 const Skills = () => {
@@ -69,7 +68,6 @@ const Skills = () => {
           </p>
         </div>
 
-        {/* Category Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {Object.entries(skillCategories).map(([key, category]) => (
             <button
@@ -87,7 +85,6 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Skills Display */}
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
           <div className="flex items-center space-x-3 mb-8">
             {React.createElement(skillCategories[activeCategory].icon, {
@@ -120,7 +117,6 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* Additional Technologies */}
         <div className="mt-16 text-center">
           <h4 className="text-xl font-semibold text-gray-900 mb-6">Additional Technologies & Tools</h4>
           <div className="flex flex-wrap justify-center gap-3">
