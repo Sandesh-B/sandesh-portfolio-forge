@@ -8,6 +8,7 @@ import Projects from '../components/Projects';
 import DeveloperTools from '../components/DeveloperTools';
 import Contact from '../components/Contact';
 import Navigation from '../components/Navigation';
+import FloatingBottomNav from '../components/FloatingBottomNav';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,8 +35,11 @@ const Index = () => {
         <Contact />
       </main>
 
+      {/* Enhanced Floating Navigation */}
+      <FloatingBottomNav />
+
       {/* Floating Action Button for Mobile */}
-      <div className="fixed bottom-6 right-6 z-40 md:hidden">
+      <div className="fixed bottom-6 left-6 z-40 md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"

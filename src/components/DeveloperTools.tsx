@@ -1,9 +1,11 @@
-
 import { useState } from 'react';
-import { Code, Palette, Layers, Copy, Check, Download } from 'lucide-react';
+import { Code, Palette, Layers, FileJson, FileText, QrCode, Hash, Key } from 'lucide-react';
 import CodeFormatter from './tools/CodeFormatter';
 import ColorPalette from './tools/ColorPalette';
 import GradientGenerator from './tools/GradientGenerator';
+import JsonFormatter from './tools/JsonFormatter';
+import Base64Tool from './tools/Base64Tool';
+import QRCodeGenerator from './tools/QRCodeGenerator';
 
 const DeveloperTools = () => {
   const [activeTab, setActiveTab] = useState('formatter');
@@ -12,21 +14,42 @@ const DeveloperTools = () => {
     {
       id: 'formatter',
       title: 'Code Formatter',
-      description: 'Format and beautify your code with syntax highlighting',
+      description: 'Format and beautify your code',
       icon: Code,
       component: CodeFormatter
     },
     {
+      id: 'json',
+      title: 'JSON Formatter',
+      description: 'Format, validate and beautify JSON',
+      icon: FileJson,
+      component: JsonFormatter
+    },
+    {
+      id: 'base64',
+      title: 'Base64 Tool',
+      description: 'Encode and decode Base64 strings',
+      icon: FileText,
+      component: Base64Tool
+    },
+    {
+      id: 'qrcode',
+      title: 'QR Code Generator',
+      description: 'Generate custom QR codes',
+      icon: QrCode,
+      component: QRCodeGenerator
+    },
+    {
       id: 'colors',
       title: 'Color Palette',
-      description: 'Generate beautiful color palettes for your projects',
+      description: 'Generate beautiful color palettes',
       icon: Palette,
       component: ColorPalette
     },
     {
       id: 'gradients',
       title: 'Gradient Generator',
-      description: 'Create stunning CSS gradients with live preview',
+      description: 'Create stunning CSS gradients',
       icon: Layers,
       component: GradientGenerator
     }
@@ -48,28 +71,30 @@ const DeveloperTools = () => {
         </div>
 
         {/* Tool Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {tools.map((tool) => (
             <button
               key={tool.id}
               onClick={() => setActiveTab(tool.id)}
-              className={`flex items-center space-x-3 px-6 py-4 rounded-xl font-semibold transition-all duration-300 ${
+              className={`group flex items-center space-x-3 px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
                 activeTab === tool.id
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 shadow-md'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg scale-105'
+                  : 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 shadow-md hover:shadow-lg'
               }`}
             >
-              <tool.icon size={20} />
+              <tool.icon size={20} className={`transition-transform duration-300 ${activeTab === tool.id ? '' : 'group-hover:scale-110'}`} />
               <div className="text-left">
-                <div className="font-semibold">{tool.title}</div>
-                <div className="text-xs opacity-80">{tool.description}</div>
+                <div className="font-semibold text-sm">{tool.title}</div>
+                <div className={`text-xs transition-opacity duration-300 ${activeTab === tool.id ? 'opacity-80' : 'opacity-60 group-hover:opacity-100'}`}>
+                  {tool.description}
+                </div>
               </div>
             </button>
           ))}
         </div>
 
         {/* Tool Content */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in">
           {ActiveComponent && <ActiveComponent />}
         </div>
 
@@ -79,12 +104,12 @@ const DeveloperTools = () => {
             {
               icon: Code,
               title: 'Open Source',
-              description: 'All tools are open source and available on GitHub for contributions and improvements.'
+              description: 'All tools are open source and available for contributions and improvements.'
             },
             {
               icon: Palette,
               title: 'Mobile Optimized',
-              description: 'Fully responsive design ensures all tools work perfectly on any device or screen size.'
+              description: 'Fully responsive design ensures all tools work perfectly on any device.'
             },
             {
               icon: Layers,
@@ -92,8 +117,8 @@ const DeveloperTools = () => {
               description: 'Works offline with service worker caching for uninterrupted productivity.'
             }
           ].map((feature, index) => (
-            <div key={index} className="text-center p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <div key={index} className="group text-center p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <feature.icon className="text-white" size={24} />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
