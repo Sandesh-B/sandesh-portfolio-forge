@@ -1,11 +1,47 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from 'react';
+import { Code, Palette, Layers, Download, Github, Linkedin, Mail, ExternalLink, Menu, X } from 'lucide-react';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Skills from '../components/Skills';
+import Projects from '../components/Projects';
+import DeveloperTools from '../components/DeveloperTools';
+import Contact from '../components/Contact';
+import Navigation from '../components/Navigation';
 
 const Index = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Tools', href: '#tools' },
+    { label: 'Contact', href: '#contact' },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      <Navigation navItems={navItems} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      
+      <main className="relative">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <DeveloperTools />
+        <Contact />
+      </main>
+
+      {/* Floating Action Button for Mobile */}
+      <div className="fixed bottom-6 right-6 z-40 md:hidden">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
     </div>
   );
